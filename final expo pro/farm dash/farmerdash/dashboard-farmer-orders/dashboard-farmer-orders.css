@@ -1,0 +1,60 @@
+:root {
+  --primary: #28a745;
+  --primary-dark: #218838;
+  --dark: #333;
+  --gray: #777;
+  --light-bg: #f7f7f7;
+  --white: #fff;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: var(--light-bg);
+  margin: 0;
+  padding: 0;
+}
+
+.orders-page {
+  padding: 60px 20px;
+  background: var(--light-bg);
+  min-height: 80vh;
+}
+
+.orders-page h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--primary);
+  margin-bottom: 40px;
+}
+
+.orders-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.order-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.order-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: var(--primary-dark);
+}
+
+.order-card p {
+  font-size: 1rem;
+  margin: 4px 0;
+  color: var(--dark);
+}
+
+.order-card p strong {
+  color: var(--gray);
+}
+
+

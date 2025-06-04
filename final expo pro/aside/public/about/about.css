@@ -1,0 +1,122 @@
+.about-main {
+  font-family: var(--font);
+  color: #333;
+  background: #fff;
+  padding-bottom: 60px;
+}
+
+.intro, .highlights, .vision, .stats, .join {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.intro h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.intro p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: auto;
+  color: #555;
+}
+
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.highlight-box {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 400px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.highlight-box h2 {
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.vision h2 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.vision p {
+  max-width: 700px;
+  margin: auto;
+  color: #666;
+  font-size: 1rem;
+}
+
+.stats-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.stat {
+  text-align: center;
+  min-width: 150px;
+}
+
+.stat h3 {
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.stat p {
+  font-size: 1rem;
+  color: #777;
+}
+
+.join {
+  background: var(--primary);
+  color: #fff;
+  padding: 60px 20px;
+  border-radius: 10px;
+  margin: 40px 20px;
+}
+
+.join h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.join-btn {
+  background: #fff;
+  color: var(--primary);
+  padding: 12px 28px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: background 0.3s;
+}
+
+.join-btn:hover {
+  background: #f0f0f0;
+}
+
+@media (max-width: 768px) {
+  .highlights {
+    flex-direction: column;
+  }
+
+  .stats-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .intro h1 {
+    font-size: 2rem;
+  }
+}

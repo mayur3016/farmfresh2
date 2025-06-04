@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile Settings - FarmFresh</title>
+  <link rel="stylesheet" href="/aside/global/global.css" />
+  <link rel="stylesheet" href="/farm dash/farmerdash/dashboard-farmer-profile/dashboard-farmer-profile.css" />
+  <!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+
+
+
+  <!-- Firebase SDKs -->
+<script type="module">
+  // Import the functions you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, set, push, onValue, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  // Your web app's Firebase config
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "XXXX",
+    appId: "XXXX"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // Make db available globally
+  window.db = db;
+  window.ref = ref;
+  window.set = set;
+  window.push = push;
+  window.onValue = onValue;
+  window.get = get;
+</script>
+
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+       <a href="#" class="logo">🌾 FarmFresh</a>
+      <nav class="nav">
+        <a href="/farm dash/farmerdash/home page/index.html">Home</a>
+        <a href="/farm dash/farmerdash/dashboard-farmer.html" class="active">Dashboard</a>
+        <a href="logout.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="profile-settings-page">
+    <h1>Profile Settings</h1>
+    <form id="profile-form" class="profile-form">
+      <div class="form-group">
+        <label for="farmerName">Full Name</label>
+        <input type="text" id="farmerName" name="farmerName" required />
+      </div>
+      <div class="form-group">
+        <label for="farmName">Farm Name</label>
+        <input type="text" id="farmName" name="farmName" required />
+      </div>
+      <div class="form-group">
+        <label for="location">Farm Location</label>
+        <input type="text" id="location" name="location" required />
+      </div>
+      <div class="form-group">
+        <label for="contact">Contact Number</label>
+        <input type="tel" id="contact" name="contact" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <button type="submit" class="btn-primary">Save Changes</button>
+    </form>
+  </main>
+
+   <footer class="footer">
+    <p>&copy; 2025 FarmFresh. All rights reserved.</p>
+  </footer>
+
+  <script src="/farm dash/farmerdash/dashboard-farmer-profile/dashboard-farmer-profile.js"></script>
+</body>
+</html>

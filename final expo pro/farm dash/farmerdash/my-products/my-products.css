@@ -1,0 +1,77 @@
+.my-products-page {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  min-height: 80vh;
+}
+
+.my-products-page h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: var(--primary);
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #eee;
+}
+
+.product-card h3 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--primary);
+}
+
+.product-card p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: var(--dark);
+}
+
+.product-card .btn-group {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+} 
+
+.product-card button {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-card button.edit-btn {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.product-card button.delete-btn {
+  background-color: #ff4d4d;
+  color: #fff;
+}

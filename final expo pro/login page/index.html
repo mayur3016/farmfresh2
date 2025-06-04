@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FarmFresh Login</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+  <script>
+    // Firebase config (✅ FIXED storageBucket)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBjM4f_VC-KeUtz2sYU0xk_2r4I0XFkaDg",
+      authDomain: "farmfreshbacken.firebaseapp.com",
+      projectId: "farmfreshbacken",
+      storageBucket: "farmfreshbacken.appspot.com",
+      messagingSenderId: "541491595847",
+      appId: "1:541491595847:web:d28b56f7aaebc8cf0abf62",
+      measurementId: "G-PBP3MG0NKT"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+  </script>
+</head>
+<body>
+  <div class="login-reg-panel">
+    <div class="login-info-box">
+      <h2>Have an account?</h2>
+      <label id="label-register" for="log-reg-show">Login</label>
+      <input type="radio" name="active-log-panel" id="log-reg-show" checked />
+    </div>
+
+    <div class="register-info-box">
+      <h2>Don't have an account?</h2>
+      <label id="label-login" for="log-login-show">Register</label><br />
+      <button><a href="/regester/register.html">Register as seller</a></button>
+      <input type="radio" name="active-log-panel" id="log-login-show" />
+    </div>
+
+    <div class="white-panel">
+      <!-- LOGIN FORM -->
+      <form id="login-form" onsubmit="return false;">
+        <div class="login-show">
+          <h1>Farm2fork</h1>
+          <h2>LOGIN</h2>
+          <input type="email" id="login-email" placeholder="Email" required />
+          <input type="password" id="login-password" placeholder="Password" minlength="6" required />
+          <button type="submit">Login</button>
+          <p id="login-error" style="color: red;"></p>
+        </div>
+      </form>
+
+      <!-- REGISTER FORM -->
+      <form id="register-form" onsubmit="return false;">
+        <div class="register-show">
+          <h1>Farm2fork</h1>
+          <h2>REGISTER</h2>
+          <input type="text" placeholder="Name" id="register-name" required />
+          <input type="email" placeholder="Email" id="register-email" required />
+          <input type="text" placeholder="Mobile Number" id="register-mobile" required />
+          <input type="password" placeholder="Password" id="register-password" minlength="6" required />
+          <input type="password" placeholder="Confirm Password" id="register-confirm" minlength="6" required />
+          <button type="submit">Register</button>
+          <p id="register-error" style="color: red;"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Toggle login/register panel
+    $(document).ready(function () {
+      $(".login-info-box").fadeOut();
+      $(".login-show").addClass("show-log-panel");
+
+      $(".login-reg-panel input[type='radio']").on("change", function () {
+        if ($("#log-login-show").is(":checked")) {
+          $(".register-info-box").fadeOut();
+          $(".login-info-box").fadeIn();
+          $(".white-panel").addClass("right-log");
+          $(".register-show").addClass("show-log-panel");
+          $(".login-show").removeClass("show-log-panel");
+        } else if ($("#log-reg-show").is(":checked")) {
+          $(".register-info-box").fadeIn();
+          $(".login-info-box").fadeOut();
+          $(".white-panel").removeClass("right-log");
+          $(".login-show").addClass("show-log-panel");
+          $(".register-show").removeClass("show-log-panel");
+        }
+      });
+    });
+
+    // ✅ Firebase login logic
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value;
+      const loginError = document.getElementById("login-error");
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+          window.location.href = "/aside/public/index.html";
+        })
+        .catch((error) => {
+          loginError.textContent = error.message;
+        });
+    });
+
+    // ✅ Firebase register logic
+    document.getElementById("register-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("register-email").value.trim();
+      const password = document.getElementById("register-password").value;
+      const confirmPassword = document.getElementById("register-confirm").value;
+      const registerError = document.getElementById("register-error");
+
+      if (password !== confirmPassword) {
+        registerError.textContent = "Passwords do not match.";
+        return;
+      }
+
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          window.location.href = "/aside/public/index.html";
+        })
+        .catch((error) => {
+          registerError.textContent = error.message;
+        });
+    });
+  </script>
+
+  <script src="/aside/global/firebase-config.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+/* auth.css */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #e7f5ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.auth-container {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.auth-container h2 {
+  color: #2f6f4e;
+  margin-bottom: 24px;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-container input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: #2f6f4e;
+}
+
+.auth-container button {
+  background-color: #2f6f4e;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-container button:hover {
+  background-color: #215f3f;
+}
+
+#message {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.switch-link {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.switch-link a {
+  color: #2f6f4e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.switch-link a:hover {
+  text-decoration: underline;
+}

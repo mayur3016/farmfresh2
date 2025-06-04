@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Product - FarmFresh</title>
+  <link rel="stylesheet" href="/aside/global/global.css" />
+  <link rel="stylesheet" href="/farm dash/farmerdash/add-product/add-product.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="#" class="logo">🌾 FarmFresh</a>
+      <nav class="nav">
+        <a href="/farm dash/farmerdash/home page/index.html">Home</a>
+        <a href="/farm dash/farmerdash/dashboard-farmer.html" class="active">Dashboard</a>
+        <a href="logout.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="add-product-page">
+    <div class="container">
+      <h1>Add New Product</h1>
+      <form id="addProductForm" class="product-form">
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input type="text" id="productName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="productDescription">Description</label>
+          <textarea id="productDescription" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="productPrice">Price (₹)</label>
+          <input type="number" id="productPrice" required min="0" step="0.01" />
+        </div>
+
+        <div class="form-group">
+          <label for="productStock">Stock Quantity</label>
+          <input type="number" id="productStock" required min="0" />
+        </div>
+
+        <div class="form-group">
+          <label for="productImage">Upload Product Image</label>
+          <input type="file" id="productImage" accept="image/*" required />
+        </div>
+
+        <button type="submit" class="btn-primary">Add Product</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 FarmFresh. All rights reserved.</p>
+  </footer>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+  
+  <!-- Your Firebase config -->
+  <script src="/aside/global/firebase-config.js"></script>
+
+  <script>
+    const auth = firebase.auth();
+    const db = firebase.database();
+    const storage = firebase.storage();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        alert('You must be logged in as a farmer to add products.');
+        window.location.href = "/farm dash/farmerdash/login.html"; // Update as needed
+      }
+    });
+
+    const addProductForm = document.getElementById('addProductForm');
+
+    addProductForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const user = auth.currentUser;
+      if (!user) {
+        alert('Please log in first.');
+        return;
+      }
+
+      const name = document.getElementById('productName').value.trim();
+      const description = document.getElementById('productDescription').value.trim();
+      const price = parseFloat(document.getElementById('productPrice').value);
+      const stock = parseInt(document.getElementById('productStock').value);
+      const imageFile = document.getElementById('productImage').files[0];
+
+      if (!imageFile) {
+        alert('Please select a product image.');
+        return;
+      }
+
+      try {
+        // Upload image to Firebase Storage
+        const storageRef = storage.ref();
+        const imageRef = storageRef.child(`product_images/${user.uid}_${Date.now()}_${imageFile.name}`);
+        const snapshot = await imageRef.put(imageFile);
+        const imageUrl = await snapshot.ref.getDownloadURL();
+
+        // Prepare product data
+        const productData = {
+          farmerId: user.uid,
+          name,
+          description,
+          price,
+          stock,
+          imageUrl,
+          createdAt: Date.now()
+        };
+
+        // Save product to Realtime Database
+        await db.ref('products').push(productData);
+
+        alert('Product added successfully!');
+        addProductForm.reset();
+
+      } catch (error) {
+        console.error('Error adding product:', error);
+        alert('Failed to add product: ' + error.message);
+      }
+    });
+  </script>
+</body>
+</html>
